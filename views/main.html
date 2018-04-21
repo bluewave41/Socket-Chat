@@ -1,0 +1,24 @@
+<h1>Socket Chat</h1>
+<div id="content">
+	<span>Here are the available servers:</span></br>
+	<div id="servers"></div>
+	<button id="createServer">Create Server</button>
+	<button id="refresh">Refresh</button>
+</div>
+
+<script>
+	socket.off('serverList');
+	$('#createServer').click(function() {
+		loadView('createServer.html');
+	});
+	$('#refresh').click(function() {
+		socket.emit('getServers', '');
+	});
+	socket.emit('getServers', '');
+	socket.on('serverList', function(data) {
+		let content = $('#servers').empty();
+		for(var x=0;x<data.length;x++) {
+			content.append(data[x][0] + ' ' + data[x][1] + '</br>');
+		}
+	});
+</script>
