@@ -1,0 +1,11 @@
+<h1>Socket Chat</h1>
+<div id="content">
+</div>
+
+<script>
+	socket.off('users');
+	socket.emit('getUsers', '');
+	socket.on('users', function(data) {
+		console.log(data);
+	});
+</script>

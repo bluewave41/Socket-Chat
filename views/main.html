@@ -17,8 +17,16 @@
 	socket.emit('getServers', '');
 	socket.on('serverList', function(data) {
 		let content = $('#servers').empty();
+		if(!data.length) {
+			content.append('No servers available at this time.');
+		}
 		for(var x=0;x<data.length;x++) {
-			content.append(data[x][0] + ' ' + data[x][1] + '</br>');
+			let button = $(`<button id=${data[x][2]}>Join</button>`);
+			button.click(function() {
+				socket.emit('joinServer', $(this).attr('id'));
+				loadView('server.html');
+			});
+			content.append(data[x][0] + ' ' + data[x][1]).append(button).append('</br>');
 		}
 	});
 </script>
