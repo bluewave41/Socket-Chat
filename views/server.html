@@ -6,6 +6,26 @@
 	socket.off('users');
 	socket.emit('getUsers', '');
 	socket.on('users', function(data) {
-		console.log(data);
+		let content = $('#content');
+		for(var x=0;x<data.length;x++) {
+			let input = $(`<input id=${data[x]} type="text"></input>`);
+			if(data[x] == id) {
+				input.keyup(function() {
+					socket.emit('updateText', [id, $(this).val()]);
+				});
+			}
+			else
+				input.prop('disabled', true);
+			content.append(input);
+		}
 	});
+	socket.on('receiveUser', function(id) {
+		$('#content').append(`<input id=${id} type="text" disabled></input>`);
+	});
+	socket.on('userLeft', function(id) {
+		$('#'+id).remove();
+	});
+	socket.on('updateText', function(userObject) {
+		$('#' + userObject[0]).val(userObject[1]);
+	})
 </script>

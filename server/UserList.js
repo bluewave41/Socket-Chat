@@ -5,14 +5,19 @@ class UserList {
 		this.users = [];
 	}
 	addUser(socket) {
-		this.users.push(new User(socket));
+		let user = new User(socket);
+		this.users.push(user);
+		return user;
 	}
-	getUsers() {
+	getUserIDs() {
 		let users = [];
 		for(var x=0;x<this.users.length;x++) {
 			users.push(this.users[x].id);
 		}
 		return users;
+	}
+	getUsers() {
+		return this.users;
 	}
 }
 

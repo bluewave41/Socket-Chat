@@ -5,6 +5,9 @@ class User {
 		this.socket = socket;
 		this.id = uuidv4();
 	}
+	receieveUser(id) {
+		this.socket.emit('receiveUser', id);
+	}
 }
 
 module.exports = User;
