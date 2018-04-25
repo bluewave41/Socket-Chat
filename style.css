@@ -9,14 +9,21 @@ body {
 	font-family: Calibri;
 }
 
+#servers {
+	margin-bottom: 10px
+}
+
 #content textarea {
 	width: 50%;
 	display: block;
-	margin: 0px auto;
-	margin-top: 50px;
+	margin: 0 auto;
 	border-radius: 20px;
 	min-height: 40px;
 	font-size: 25px;
+}
+
+.user {
+	margin-bottom: 20px;
 }
 
 #options {
@@ -26,6 +33,7 @@ body {
 	background-color: #000000;
 	cursor: pointer;
 	width: 150px;
+	border-radius: 0px 0px 25px 25px;
 }
 
 #optionsContent {

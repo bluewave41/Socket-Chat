@@ -6,19 +6,21 @@
 	socket.off('users');
 	socket.emit('getUsers', '');
 	socket.on('users', function(data) {
+		console.log(data);
 		let content = $('#content');
 		for(var x=0;x<data.length;x++) {
-			let input = $(`<textarea id=${data[x]}</textarea>`);
-			content.append(input);
+			let $div = $('<div class="user"></div>');
+			let $input = $(`<textarea id=${data[x]}></textarea>`);
 			if(data[x] == id) {
-				input.keyup(function() {
+				$input.keyup(function() {
 					socket.emit('updateText', [id, $(this).val()]);
 				});
-				content.append('<div id="optionsContent"><label>Command: </label><input type="text"></input></div>');
-				content.append('<div id="options">OPTIONS</div>');
+				$div.append('<div id="optionsContent"><label>Command: </label><input  id="optionsText" type="text"></input>');
+				$div.append('<div id="options">OPTIONS</div></div>');
 			}
 			else
-				input.prop('disabled', true);
+				$input.prop('disabled', true);
+			content.append($div.prepend($input));
 		}
 	});
 	socket.on('receiveUser', function(id) {
@@ -30,8 +32,19 @@
 	socket.on('updateText', function(userObject) {
 		$('#' + userObject[0]).val(userObject[1]);
 	});
+	socket.on('updateColor', function(colorObject) {
+		console.log(colorObject);
+		$('#' + colorObject[0]).css({color: colorObject[1]});
+	});
 	
 	$('#content').on('click', '#options', function() {
 		$('#optionsContent').slideToggle();
+	});
+	$('#content').on('keypress', '#optionsText', function(e) {
+		console.log($(this).val());
+		if(e.keyCode == 13) {
+			socket.emit('options', $(this).val());
+			$(this).val('');
+		}
 	});
 </script>

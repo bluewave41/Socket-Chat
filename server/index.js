@@ -44,6 +44,18 @@ io.on('connection', function(socket) {
 	socket.on('updateText', function(userObject) {
 		socket.room.updateTextForAllExceptSender(userObject);
 	});
+	socket.on('options', function(option) {
+		console.log(option);
+		option = option.split(' ');
+		let options = ['color', 'name'];
+		if(options.indexOf(option[0]) != -1) { //valid option
+			switch(option[0]) {
+				case 'color': //validate color is valid
+					socket.room.updateColor([socket.user.id, option[1]]);
+					break;
+			}
+		}
+	});
 });
 
 http.listen(5555, function() {
