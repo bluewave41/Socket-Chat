@@ -8,7 +8,7 @@
 	socket.on('users', function(data) {
 		let content = $('#content');
 		for(var x=0;x<data.length;x++) {
-			let input = $(`<input id=${data[x]} type="text"></input>`);
+			let input = $(`<textarea id=${data[x]}</textarea>`);
 			if(data[x] == id) {
 				input.keyup(function() {
 					socket.emit('updateText', [id, $(this).val()]);
@@ -20,7 +20,7 @@
 		}
 	});
 	socket.on('receiveUser', function(id) {
-		$('#content').append(`<input id=${id} type="text" disabled></input>`);
+		$('#content').append(`<textarea id=${id} disabled></textarea>`);
 	});
 	socket.on('userLeft', function(id) {
 		$('#'+id).remove();
