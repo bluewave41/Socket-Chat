@@ -28,6 +28,7 @@ io.on('connection', function(socket) {
 		rooms.createRoom(title, password, id);
 	});
 	socket.on('getServers', function() {
+		console.log('got servers');
 		socket.emit('serverList', rooms.getRooms());
 	});
 	socket.on('joinServer', function(id) {

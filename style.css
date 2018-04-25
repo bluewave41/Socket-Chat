@@ -18,3 +18,19 @@ body {
 	min-height: 40px;
 	font-size: 25px;
 }
+
+#options {
+	margin: auto;
+	color: #00FF00;
+	text-align: center;
+	background-color: #000000;
+	cursor: pointer;
+	width: 150px;
+}
+
+#optionsContent {
+	display: none;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

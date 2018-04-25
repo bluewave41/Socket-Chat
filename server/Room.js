@@ -27,8 +27,9 @@ class Room {
 	userLeft(id) {
 		let users = this.userList.getUsers();
 		for(var x=0;x<users.length;x++) {
+			console.log(users[x].id + ' ' + id);
 			if(users[x].id == id) {
-				users = users.splice(x--, 1);
+				users.splice(x--, 1);
 			}
 			else
 				users[x].socket.emit('userLeft', id);

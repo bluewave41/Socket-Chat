@@ -1,8 +1,8 @@
 var socket;
 
 $(document).ready(function() {
-	loadView('main.html');
 	socket = io('http://localhost:5555');
+	loadView('main.html');
 	socket.on('connect', function() {
 		console.log('connected');
 	});
