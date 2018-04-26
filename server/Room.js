@@ -16,7 +16,7 @@ class Room {
 		return user;
 	}
 	getUsers() {
-		return this.userList.getUserIDs();
+		return this.userList.getUserInfo();
 	}
 	updateUsers(id) {
 		let users = this.userList.getUsers();

@@ -6,12 +6,13 @@
 	socket.off('users');
 	socket.emit('getUsers', '');
 	socket.on('users', function(data) {
+		console.log(data);
 		let content = $('#content');
 		for(var x=0;x<data.length;x++) {
-			let $div = $('<div class="user"><div id="name">Hello</div></div>');
-			let $input = $(`<textarea id=${data[x]}></textarea>`);
+			let $div = $(`<div class="user"><div id="name">${data[x].name}</div></div>`);
+			let $input = $(`<textarea style="color: ${data[x].color}" id=${data[x].id}></textarea>`);
 			$div.append($input);
-			if(data[x] == id) {
+			if(data[x].id == id) {
 				$input.keyup(function() {
 					socket.emit('updateText', [id, $(this).val()]);
 				});

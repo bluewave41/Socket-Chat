@@ -9,10 +9,10 @@ class UserList {
 		this.users.push(user);
 		return user;
 	}
-	getUserIDs() {
+	getUserInfo() {
 		let users = [];
 		for(var x=0;x<this.users.length;x++) {
-			users.push(this.users[x].id);
+			users.push(this.users[x].safeInfo());
 		}
 		return users;
 	}

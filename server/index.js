@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 var RoomList = require('./RoomList');
 var stdin = process.openStdin();
 const uuidv4 = require('uuid/v4');
+const MAXNAMESIZE = 16;
 
 stdin.addListener("data", function(d) {
 	try {
@@ -44,16 +45,21 @@ io.on('connection', function(socket) {
 		socket.room.updateTextForAllExceptSender(userObject);
 	});
 	socket.on('options', function(option) {
-		console.log(option);
 		option = option.split(' ');
 		let options = ['color', 'name'];
 		if(options.indexOf(option[0]) != -1) { //valid option
 			switch(option[0]) {
 				case 'color': //validate color is valid
 					socket.room.updateColor([socket.user.id, option[1]]);
+					socket.user.color = option[1];
 					break;
-				case 'name': //validate name
-					socket.room.updateName([socket.user.id, option[1]]);
+				case 'name':
+					option.shift(); //remove "name"
+					option = option.join(' ');
+					if(option.length > MAXNAMESIZE)
+						return;
+					socket.room.updateName([socket.user.id, option]);
+					socket.user.name = option;
 					break;
 			}
 		}
