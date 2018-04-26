@@ -6,7 +6,6 @@
 	socket.off('users');
 	socket.emit('getUsers', '');
 	socket.on('users', function(data) {
-		console.log(data);
 		let content = $('#content');
 		for(var x=0;x<data.length;x++) {
 			let $div = $('<div class="user"><div id="name">Hello</div></div>');
@@ -16,7 +15,7 @@
 				$input.keyup(function() {
 					socket.emit('updateText', [id, $(this).val()]);
 				});
-				$div.append('<div id="optionsContent"><label>Command: </label><input  id="optionsText" type="text"></input>');
+				$div.append('<div id="optionsContent"><label>Command: </label><input id="optionsText" type="text"></input>');
 				$div.append('<div id="options">OPTIONS</div></div>');
 			}
 			else
