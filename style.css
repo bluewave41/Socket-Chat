@@ -9,6 +9,11 @@ body {
 	font-family: Calibri;
 }
 
+#name {
+	width: 55%;
+	text-align: center;
+}
+
 #servers {
 	margin-bottom: 10px
 }

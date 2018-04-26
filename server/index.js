@@ -53,6 +53,10 @@ io.on('connection', function(socket) {
 				case 'color': //validate color is valid
 					socket.room.updateColor([socket.user.id, option[1]]);
 					break;
+				case 'name': //validate name
+					console.log('name');
+					socket.room.updateName([socket.user.id, option[1]]);
+					break;
 			}
 		}
 	});

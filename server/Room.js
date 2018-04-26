@@ -44,10 +44,15 @@ class Room {
 		}
 	}
 	updateColor(colorObject) {
-		console.log(colorObject);
 		let users = this.userList.getUsers();
 		for(var x=0;x<users.length;x++) {
 			users[x].socket.emit('updateColor', [colorObject[0], colorObject[1]]);
+		}
+	}
+	updateName(nameObject) {
+		let users = this.userList.getUsers();
+		for(var x=0;x<users.length;x++) {
+			users[x].socket.emit('updateName', [nameObject[0], nameObject[1]]);
 		}
 	}
 }
