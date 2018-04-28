@@ -9,6 +9,31 @@ body {
 	font-family: Calibri;
 }
 
+footer {
+	position: absolute;
+	bottom: 0;
+}
+
+.disconnected {
+	height: 10px;
+	width: 10px;
+	background-color: #FF0000;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.connected {
+	height: 10px;
+	width: 10px;
+	background-color: #00FF00;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+#content {
+	margin-left: 20px;
+}
+
 #name {
 	width: 55%;
 	text-align: center;

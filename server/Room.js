@@ -18,6 +18,9 @@ class Room {
 	getUsers() {
 		return this.userList.getUserInfo();
 	}
+	getNumberOfUsers() {
+		return this.userList.users.length;
+	}
 	updateUsers(id) {
 		let users = this.userList.getUsers();
 		for(var x=0;x<users.length;x++) {
@@ -27,7 +30,6 @@ class Room {
 	userLeft(id) {
 		let users = this.userList.getUsers();
 		for(var x=0;x<users.length;x++) {
-			console.log(users[x].id + ' ' + id);
 			if(users[x].id == id) {
 				users.splice(x--, 1);
 			}

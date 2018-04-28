@@ -14,7 +14,12 @@ class RoomList {
 			let password = 0;
 			if(this.rooms[x].password)
 				password = 1;
-			rooms.push([room.title, password, room.id]);
+			rooms.push({
+				title: room.title,
+				password: password,
+				id: room.id,
+				numberOfUsers: room.getNumberOfUsers()
+			});
 		}
 		return rooms;
 	}

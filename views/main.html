@@ -1,12 +1,10 @@
 <h1>Socket Chat</h1>
-<div id="content">
-	<span>Here are the available servers:</span></br>
-	<div id="servers">
-		<table id="serverTable"></table>
-	</div>
-	<button id="createServer">Create Server</button>
-	<button id="refresh">Refresh</button>
+<span>Here are the available servers:</span></br>
+<div id="servers">
+	<table id="serverTable"></table>
 </div>
+<button id="createServer">Create Server</button>
+<button id="refresh">Refresh</button>
 
 <script>
 	var id;
@@ -21,19 +19,20 @@
 	socket.emit('getServers', '');
 	socket.on('serverList', function(data) {
 		let content = $('#serverTable').empty();
-		content.append('<th>Name</th><th>Password?</th>');
+		content.append('<th>Name</th><th>Password?</th><th>Number of users</th>');
 		if(!data.length) {
 			content.append('No servers available at this time.');
 		}
 		for(var x=0;x<data.length;x++) {
 			let tr = $('<tr></tr>');
-			let button = $(`<button id=${data[x][2]}>Join</button>`);
+			let button = $(`<button id=${data[x].id}>Join</button>`);
 			button.click(function() {
 				socket.emit('joinServer', $(this).attr('id'));
 			});
 			button.wrap('<td></td>');
-			tr.append('<td>' + data[x][0] + '</td>');
-			tr.append('<td>' + ((data[x][1]) ? 'yes' : 'no') + '</td>');
+			tr.append('<td>' + data[x].title + '</td>');
+			tr.append('<td>' + ((data[x].password) ? 'yes' : 'no') + '</td>');
+			tr.append('<td>' + data[x].numberOfUsers+ '</td>');
 			tr.append(button);
 
 			content.append(tr);
