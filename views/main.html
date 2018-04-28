@@ -21,7 +21,7 @@
 		let content = $('#serverTable').empty();
 		content.append('<th>Name</th><th>Password?</th><th>Number of users</th>');
 		if(!data.length) {
-			content.append('No servers available at this time.');
+			content.after('No servers available at this time.');
 		}
 		for(var x=0;x<data.length;x++) {
 			let tr = $('<tr></tr>');
@@ -29,11 +29,10 @@
 			button.click(function() {
 				socket.emit('joinServer', $(this).attr('id'));
 			});
-			button.wrap('<td></td>');
 			tr.append('<td>' + data[x].title + '</td>');
 			tr.append('<td>' + ((data[x].password) ? 'yes' : 'no') + '</td>');
 			tr.append('<td>' + data[x].numberOfUsers+ '</td>');
-			tr.append(button);
+			tr.append(button.wrap('<td></td>').parents());
 
 			content.append(tr);
 		}
