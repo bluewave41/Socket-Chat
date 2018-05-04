@@ -1,5 +1,8 @@
 var UserList = require('./UserList');
 
+/*Maximum number of characters allowed in a textbox*/
+const MAXSIZE = 250;
+
 class Room {
 	constructor(title, password, id) {
 		this.title = title;
@@ -41,6 +44,8 @@ class Room {
 		let users = this.userList.getUsers();
 		for(var x=0;x<users.length;x++) {
 			if(users[x].id != userObject[0]) {
+				if(userObject[1].length > MAXSIZE)
+					return;
 				users[x].socket.emit('updateText', [userObject[0], userObject[1]]);
 			}
 		}
