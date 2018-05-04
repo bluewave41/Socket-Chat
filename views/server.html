@@ -28,7 +28,7 @@
 		$('#'+id).parent().remove();
 	});
 	socket.on('updateText', function(userObject) {
-		$('#' + userObject[0]).val(userObject[1]);
+		$('#' + userObject[0]).val(userObject[1]).trigger('keypress');
 	});
 	socket.on('updateColor', function(colorObject) {
 		$('#' + colorObject[0]).css({color: colorObject[1]});
@@ -46,4 +46,9 @@
 			$(this).val('');
 		}
 	});
+	$(document).on('keypress paste', 'textarea', function() {
+		console.log('a');
+        this.rows = 0;
+        this.rows = Math.floor(this.scrollHeight / 15);
+    });
 </script>
